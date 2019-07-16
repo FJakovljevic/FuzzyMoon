@@ -4,8 +4,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import fuzzy.rules.LogicalOperators;
-
 public class TermLinear implements TermInterface {
 
 	// gde ovo izbaciti
@@ -15,7 +13,6 @@ public class TermLinear implements TermInterface {
 
 	private List<Point2D> points = new ArrayList<Point2D>();
 	private String name;
-	private Boolean isNegated = false;
 
 	public TermLinear(String name, String coordinates) throws IllegalArgumentException {
 		if (!coordinates.matches(regPointArr))

@@ -1,8 +1,8 @@
 package apiTest;
 
 import fuzzy.rules.LogicalOperators;
-import fuzzy.rules.Rule;
-import fuzzy.rules.RuleComposite;
+import fuzzy.rules.Statment;
+import fuzzy.rules.StatmentComposite;
 import fuzzy.sistem.FuzzySistem;
 import fuzzy.sistem.Variable;
 import fuzzy.terms.TermDistribution;
@@ -23,8 +23,8 @@ public class TestMain2 {
 		// pravljenje variabla za fuzzy sistem i dodadvanje u sistem
 		Variable povrsina = new Variable("povrsina");
 		Variable udaljenost_od_centra = new Variable("udaljenost_od_centra");
-		fuzzySistem.addVar(povrsina);
-		fuzzySistem.addVar(udaljenost_od_centra);		
+		fuzzySistem.addInputVar(povrsina);
+		fuzzySistem.addInputVar(udaljenost_od_centra);		
 		
 		// pravljenje termina i pirpajanje terminima
 		TermInterface mala = new TermFactory().createTerm(TermDistribution.LINEAR, "mala", "(20,1) (30,1) (40,0)");
@@ -40,11 +40,11 @@ public class TestMain2 {
 		udaljenost_od_centra.addTerm(periferija);
 		
 		// pravljenje pravila i njihovo dodavanje u fuzzy sistem		
-		Rule rule1 = new Rule("udaljenost_od_centra", "centar");
-		Rule rule2 = new Rule("povrsina", "mala");
-		Rule rule3 = new Rule("povrsina", "srednja");
-		Rule rule4 = new Rule("povrsina", "velika");
-		Rule rule5 = new Rule("udaljenost_od_centra", "periferija");
+		Statment rule1 = new Statment("udaljenost_od_centra", "centar");
+		Statment rule2 = new Statment("povrsina", "mala");
+		Statment rule3 = new Statment("povrsina", "srednja");
+		Statment rule4 = new Statment("povrsina", "velika");
+		Statment rule5 = new Statment("udaljenost_od_centra", "periferija");
 		
 		fuzzySistem.addRule(rule1);
 		fuzzySistem.addRule(rule2);
