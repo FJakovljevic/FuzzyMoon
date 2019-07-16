@@ -7,8 +7,8 @@ import java.util.List;
 public class TermLinear implements TermInterface {
 
 	// gde ovo izbaciti
-	private static final String regFloat = "[0-9]*\\.?[0-9]*";
-	private static final String regPercent = "(1|0\\.?[0-9]*)";
+	private static final String regFloat = " *-?[0-9]*\\.?[0-9]*";
+	private static final String regPercent = " *(1|0\\.?[0-9]*)";
 	private static final String regPointArr = "(\\(" + regFloat + "," + regPercent + "\\) *)+";
 
 	private List<Point2D> points = new ArrayList<Point2D>();
@@ -49,6 +49,18 @@ public class TermLinear implements TermInterface {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public double returnStepSize(int x) {
+		double x1 = points.get(0).getX();
+		double x2 = points.get(points.size()-1).getX();
+		return (x2-x1)/x;
+	}
+
+	@Override
+	public double returnFirstPoint() {
+		return points.get(0).getX();
 	}
 
 //	public void printGraph() {

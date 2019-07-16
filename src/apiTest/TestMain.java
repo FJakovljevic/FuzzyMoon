@@ -15,8 +15,8 @@ import fuzzy.terms.TermInterface;
 
 public class TestMain {
 	
-	private static final String regFloat = "[0-9]*\\.?[0-9]*";
-	private static final String regPercent = "(1|0\\.?[0-9]*)";
+	private static final String regFloat = " *-?[0-9]*\\.?[0-9]*";
+	private static final String regPercent = " *(1|0\\.?[0-9]*)";
 	private static final String regPoitArr = "(\\("+regFloat+","+regPercent+"\\) *)+";
 
 	public static void main(String[] args) {
@@ -110,15 +110,16 @@ public class TestMain {
 		// dobri
 		System.out.println("(12,0)".matches(regPoitArr));
 		System.out.println("(13,1)".matches(regPoitArr));
-		System.out.println("(13.2342,0.323)".matches(regPoitArr));
+		System.out.println("(13.2342, 0.323)".matches(regPoitArr));
 		System.out.println("(13.2342,0.323)(13,0.7)(1,1)(1000,0.3)".matches(regPoitArr));
 		System.out.println("(13.2342,0.323) (13,0.7) (1,1)  (1000,0.3)".matches(regPoitArr));
+		System.out.println("(-323,0.1)".matches(regPoitArr));
+		System.out.println("( 3, 0.1)".matches(regPoitArr));
 		
 		//losi
 		System.out.println("(13,12)".matches(regPoitArr));
 		System.out.println("1(13,1)".matches(regPoitArr));
 		System.out.println("(13,0.23.)".matches(regPoitArr));
-		System.out.println("(-323,0.1)".matches(regPoitArr));
 		System.out.println("(13.2342,0.323) (13,0.7) (1,1)  (1000,0.3) (13)".matches(regPoitArr));		
 	}
 

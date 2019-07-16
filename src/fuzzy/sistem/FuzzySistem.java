@@ -1,5 +1,6 @@
 package fuzzy.sistem;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,6 +108,12 @@ public class FuzzySistem {
 		for (String key : varTerm.keySet()) {
 			System.out.println("\t " + key + ": " + varTerm.get(key));
 		}
+		
+		System.out.println("Defuzzification:");
+		for (Variable var : outVariables.values()) {
+			var.defuzzify(varTerm);
+		}
+		
 		
 	}
 
