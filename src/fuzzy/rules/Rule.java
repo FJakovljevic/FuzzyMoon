@@ -27,6 +27,7 @@ public class Rule {
 	}
 	
 	public String returnRuleCalculated(FuzzySistem fs) {
+//		String res = "\t" + String.format("%.5f", statment.calculateTruth(fs)) + "%\t";
 		String res = "\t" + statment.calculateTruth(fs) + "%\t";
 		String ifPart = "IF " + statment.returnRule() + " THEN ";
 		String thenPart = "";

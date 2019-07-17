@@ -12,7 +12,7 @@ import fuzzy.terms.TermDistribution;
 import fuzzy.terms.TermFactory;
 import fuzzy.terms.TermInterface;
 
-public class TestMain {
+public class TestMainAPI {
 
 	public static void main(String[] args) {
 		
@@ -28,21 +28,22 @@ public class TestMain {
 		fuzzySistem.addOutputVar(tip);
 		
 		// pravljenje termina i pirpajanje terminima
-		TermInterface service_poor = new TermFactory().createTerm(TermDistribution.LINEAR, "poor", "(0,1) (4,0)");
-		TermInterface service_good = new TermFactory().createTerm(TermDistribution.LINEAR, "good", "(1,0) (4,1) (6,1) (9,0)");
-		TermInterface service_excellent = new TermFactory().createTerm(TermDistribution.LINEAR, "excellent", "(6,0) (9,1)");
+		TermFactory tf = new TermFactory();
+		TermInterface service_poor = tf.createTerm(TermDistribution.LINEAR, "poor", "(0,1) (4,0)");
+		TermInterface service_good = tf.createTerm(TermDistribution.LINEAR, "good", "(1,0) (4,1) (6,1) (9,0)");
+		TermInterface service_excellent = tf.createTerm(TermDistribution.LINEAR, "excellent", "(6,0) (9,1)");
 		service.addTerm(service_poor);
 		service.addTerm(service_good);
 		service.addTerm(service_excellent);
 		
-		TermInterface food_rancid = new TermFactory().createTerm(TermDistribution.LINEAR, "rancid", "(0,1) (1,1) (3,0)");
-		TermInterface food_delicious = new TermFactory().createTerm(TermDistribution.LINEAR, "delicious", "(7,0) (9,1)");
+		TermInterface food_rancid = tf.createTerm(TermDistribution.LINEAR, "rancid", "(0,1) (1,1) (3,0)");
+		TermInterface food_delicious = tf.createTerm(TermDistribution.LINEAR, "delicious", "(7,0) (9,1)");
 		food.addTerm(food_rancid);
 		food.addTerm(food_delicious);
 		
-		TermInterface tip_cheap = new TermFactory().createTerm(TermDistribution.LINEAR, "cheap", "(0,0) (5,1) (10,0)");
-		TermInterface tip_avrage = new TermFactory().createTerm(TermDistribution.LINEAR, "avrage", "(10,0) (15,1) (20,0)");
-		TermInterface tip_generous = new TermFactory().createTerm(TermDistribution.LINEAR, "generous", "(20,0) (25,1) (30,0)");
+		TermInterface tip_cheap = tf.createTerm(TermDistribution.LINEAR, "cheap", "(0,0) (5,1) (10,0)");
+		TermInterface tip_avrage = tf.createTerm(TermDistribution.LINEAR, "avrage", "(10,0) (15,1) (20,0)");
+		TermInterface tip_generous = tf.createTerm(TermDistribution.LINEAR, "generous", "(20,0) (25,1) (30,0)");
 		tip.addTerm(tip_cheap);
 		tip.addTerm(tip_avrage);
 		tip.addTerm(tip_generous);
