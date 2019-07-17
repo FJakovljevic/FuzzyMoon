@@ -1,0 +1,151 @@
+{
+	"definitions": {
+		"Term": {
+			"title": "Term",
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"data": {
+					"type": "string"
+				},
+				"function": {
+					"enum": [
+						"LINEAR"
+					]
+				}
+			},
+			"required": [
+				"name",
+				"data",
+				"function"
+			]
+		},
+		"Var": {
+			"title": "Var",
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"var_type": {
+					"enum": [
+						"INPUT",
+						"OUTPUT"
+					]
+				},
+				"defuzzification": {
+					"enum": [
+						"COG"
+					]
+				},
+				"numberOfSteps": {
+					"type": "number"
+				},
+				"terms": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Term"
+					},
+					"minItems": 1,
+					"uniqueItems": true
+				}
+			},
+			"required": [
+				"name",
+				"var_type",
+				"terms"
+			]
+		},
+		"Statement": {
+			"title": "Statement",
+			"type": "object",
+			"properties": {
+				"var": {
+					"type": "string"
+				},
+				"value": {
+					"type": "string"
+				},
+				"negation": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"var",
+				"value"
+			]
+		},
+		"ComplexStatement": {
+			"title": "ComplexStatement",
+			"type": "object",
+			"properties": {
+				"left": {
+					"anyOf": [
+						{
+							"$ref": "#/definitions/Statement"
+						},
+						{
+							"$ref": "#/definitions/ComplexStatement"
+						}
+					]
+				},
+				"right": {
+					"anyOf": [
+						{
+							"$ref": "#/definitions/Statement"
+						},
+						{
+							"$ref": "#/definitions/ComplexStatement"
+						}
+					]
+				},
+				"connector": {
+					"enum": [
+						"AND",
+						"OR"
+					]
+				},
+				"negation": {
+					"type": "boolean"
+				}
+			},
+			"required": [
+				"left",
+				"right",
+				"connector"
+			]
+		}
+	},
+	"type": "object",
+	"properties": {
+		"variables": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/Var"
+			}
+		},
+		"rules": {
+			"type": "array",
+			"items": {
+				"if": {
+					"anyOf": [
+						{
+							"$ref": "#/definitions/Statement"
+						},
+						{
+							"$ref": "#/definitions/ComplexStatement"
+						}
+					]
+				},
+				"then": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Statement"
+					}
+				}
+			}
+		}
+	}
+}

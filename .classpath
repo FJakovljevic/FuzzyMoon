@@ -9,5 +9,8 @@
 	<classpathentry kind="lib" path="lib/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="lib/handy-uri-templates-2.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/json.jar"/>
+	<classpathentry kind="lib" path="lib/org.everit.json.schema-1.9.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,8 +1,6 @@
 package apiTest;
 
-import fuzzy.rules.LogicalOperators;
-import fuzzy.rules.Statment;
-import fuzzy.rules.StatmentComposite;
+import fuzzy.readers.JsonReader;
 import fuzzy.sistem.FuzzySistem;
 import fuzzy.sistem.Variable;
 import fuzzy.terms.TermDistribution;
@@ -10,10 +8,16 @@ import fuzzy.terms.TermFactory;
 import fuzzy.terms.TermInterface;
 
 public class TestMain2 {
+//	
+//	private static final String regFloat = "[0-9]*\\.?[0-9]*";
+//	private static final String regPercent = "(1|0\\.?[0-9]*)";
+//	private static final String regPoitArr = "(\\("+regFloat+","+regPercent+"\\) *)+";
 	
-	private static final String regFloat = "[0-9]*\\.?[0-9]*";
-	private static final String regPercent = "(1|0\\.?[0-9]*)";
-	private static final String regPoitArr = "(\\("+regFloat+","+regPercent+"\\) *)+";
+	private static final String T = "[A-Za-z0-9]+ +(IS|IS NOT) +[A-Za-z0-9]+";
+	private static final String CTT = T + " +(AND|OR) +" + T;
+	private static final String CCT = "(" + CTT + "|" + T + ")" + " +(AND|OR) +" + "(" + CTT + "|" + T + ")";
+	private static final String COMPLEX = "(" + CCT + "|" + CTT + "|" + T + ")" + " +(AND|OR) +" + "(" + CCT + "|" + CTT + "|" + T + ")";
+
 
 	public static void main(String[] args) {
 		
@@ -39,23 +43,20 @@ public class TestMain2 {
 		udaljenost_od_centra.addTerm(centar);
 		udaljenost_od_centra.addTerm(periferija);
 		
-		// pravljenje pravila i njihovo dodavanje u fuzzy sistem		
-		Statment rule1 = new Statment("udaljenost_od_centra", "centar");
-		Statment rule2 = new Statment("povrsina", "mala");
-		Statment rule3 = new Statment("povrsina", "srednja");
-		Statment rule4 = new Statment("povrsina", "velika");
-		Statment rule5 = new Statment("udaljenost_od_centra", "periferija");
+
 		
-		fuzzySistem.addRule(rule1);
-		fuzzySistem.addRule(rule2);
-		fuzzySistem.addRule(rule3);
-		fuzzySistem.addRule(rule4);
-		fuzzySistem.addRule(rule5);
+		System.out.println("food IS rancid".matches(T));
+		System.out.println("food IS rancid AND service IS excellent".matches(CTT));
+		System.out.println("food IS rancid AND service IS excellent OR service IS bad".matches(CCT));
+		System.out.println("food IS rancid AND service IS excellent OR service IS bad OR service IS great".matches(CCT));
+		System.out.println("food IS rancid AND service IS excellent OR service IS bad OR service IS great AND food IS bad".matches(COMPLEX));
 		
+		System.out.println();
 		
-		// ubacivanje pocetnih vrednosti i racunanje prema pravilima
-		fuzzySistem.addInput("povrsina", 51);
-		fuzzySistem.addInput("udaljenost_od_centra", 2.1);
-		fuzzySistem.calculateRules();
+		FuzzySistem fs = new JsonReader().read("res/fuzzyTest.json");
+		fs.addInput("povrsina", 51);
+		fs.addInput("udaljenost_od_centra", 2.3);
+		fs.calculateRules();
+		
 	}
 }

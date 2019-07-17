@@ -1,6 +1,5 @@
 package fuzzy.sistem;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +86,7 @@ public class FuzzySistem {
 		rules.add(rule);
 	}
 
-	public void calculateRules() {
+	public HashMap<String, Double> calculateRules() {
 		HashMap<String, Double> varTerm = new HashMap<String, Double>();
 		
 		System.out.println("Aggregation of rules:");
@@ -111,10 +110,12 @@ public class FuzzySistem {
 		
 		System.out.println("Defuzzification:");
 		for (Variable var : outVariables.values()) {
-			var.defuzzify(varTerm);
+			double result = var.defuzzify(varTerm);
+			System.out.println("\t " + var.getName() + " --> " + result);
+			outputs.put(var.getName(), result);
 		}
 		
-		
+		return outputs;
 	}
 
 	public double resolveAggregation(LogicalOperators operation, double x, double y) {
