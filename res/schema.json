@@ -145,7 +145,15 @@
 						"$ref": "#/definitions/Statement"
 					}
 				}
-			}
+			},
+			"required": [
+				"if",
+				"then"
+			]
 		}
-	}
+	},
+	"required": [
+		"variables",
+		"rules"
+	]
 }
